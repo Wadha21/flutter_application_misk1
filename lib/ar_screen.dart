@@ -13,11 +13,18 @@ import 'package:geolocator/geolocator.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
+import 'package:audioplayers/audioplayers.dart';
 
 class ARScreen extends StatefulWidget {
   final double latitude;
   final double longitude;
-  const ARScreen({super.key, required this.latitude, required this.longitude});
+  final String travelMode;
+  const ARScreen({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+    required this.travelMode,
+  });
 
   @override
   State<ARScreen> createState() => _ARScreenState();
@@ -34,9 +41,22 @@ class _ARScreenState extends State<ARScreen> {
   ARNode? _node;
   List<ARNode> pathNodes = [];
   List<PointLatLng> _routePoints = [];
-  final String googleApiKey = "Google_API_Key";
+  final String googleApiKey = "APIKEY";
   //  enable Directions API key from google;
 
+  final player = AudioPlayer();
+  final Map<String, Map<String, String>> objectData = {
+    "Alfao.glb": {
+      "title": "تمثال الفاو العظيم",
+      "info": "قطعة فنية تحاكي تراث مدينة الفاو الأثرية...",
+      "audio": "audio/alfao_info.mp3",
+    },
+    "dots_path.glb": {
+      "title": "نقطة توجيه",
+      "info": "هذه النقطة تشير إلى المسار الصحيح للمشي.",
+      "audio": "",
+    },
+  };
   @override
   void initState() {
     super.initState();
@@ -46,10 +66,14 @@ class _ARScreenState extends State<ARScreen> {
   }
 
   Future<void> _initSensors() async {
+    if (widget.travelMode != 'walking') {
+      return;
+    }
+
     _userPos = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
-    await fetchRoutePoints();
+    // await fetchRoutePoints();
 
     _headingSub = FlutterCompass.events?.listen((e) {
       if (e.heading != null) {
@@ -62,24 +86,30 @@ class _ARScreenState extends State<ARScreen> {
   Future<void> fetchRoutePoints() async {
     if (_userPos == null) return;
 
-    PolylinePoints polylinePoints = PolylinePoints(
-      apiKey: "Google_API_Key",
-    );
+    TravelMode mode = TravelMode.walking;
+
+    PolylinePoints polylinePoints = PolylinePoints(apiKey: googleApiKey);
+
     // ignore: deprecated_member_use
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       request: PolylineRequest(
         origin: PointLatLng(_userPos!.latitude, _userPos!.longitude),
         destination: PointLatLng(widget.latitude, widget.longitude),
-        mode: TravelMode.walking,
+        mode: mode,
         // walking, bicycle, car ...
       ),
     );
+    // if (widget.travelMode == 'driving') {
+    //   mode = TravelMode.driving;
+    // } else if (widget.travelMode == 'bicycling') {
+    //   mode = TravelMode.bicycling;
+    // }
 
     if (result.points.isNotEmpty) {
       setState(() {
         _routePoints = result.points;
       });
-      // Now that you have the path, trigger placement
+
       _place();
     }
   }
@@ -168,15 +198,64 @@ class _ARScreenState extends State<ARScreen> {
 
   @override
   void dispose() {
+    player.dispose();
     _headingSub?.cancel();
     arSessionManager?.dispose();
     super.dispose();
   }
 
+  void _onNodeTapped(List<dynamic> nodes) {
+    final tappedNodes = nodes.whereType<ARNode>().toList();
+    // ... (الكود لعرض النافذة وتشغيل الصوت)
+    if (tappedNodes.isEmpty) return;
+
+    final tappedNode = tappedNodes.first;
+
+    final uri = tappedNode.uri!.split('/').last;
+    final data = objectData[uri];
+
+    if (data == null) return;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(data['title']!),
+          content: Text(data['info']!),
+          actions: [
+            TextButton(
+              onPressed: () {
+                player.stop();
+                Navigator.of(context).pop();
+              },
+              child: const Text('إغلاق'),
+            ),
+            if (data['audio']!.isNotEmpty)
+              TextButton.icon(
+                icon: const Icon(Icons.volume_up),
+                label: const Text('استماع'),
+                onPressed: () {
+                  player.play(AssetSource(data['audio']!));
+                },
+              ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("AR View")),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFA07856),
+        title: const Text(
+          "AR View (Walking)",
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+      ),
       body: ARView(
         planeDetectionConfig: PlaneDetectionConfig.horizontal,
         onARViewCreated: (s, o, a, l) {
@@ -188,6 +267,8 @@ class _ARScreenState extends State<ARScreen> {
             handlePans: true,
           );
           o.onInitialize();
+          o.onNodeTap = _onNodeTapped;
+          fetchRoutePoints();
         },
       ),
     );

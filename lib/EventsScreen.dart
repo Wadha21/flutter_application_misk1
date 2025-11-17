@@ -20,8 +20,9 @@ class _EventsScreenState extends State<EventsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1A4D3E),
+        backgroundColor: const Color(0xFFA07856),
         elevation: 0,
         title: const Text("الفعاليات", style: TextStyle(color: Colors.white)),
         centerTitle: false,
@@ -48,9 +49,11 @@ class _EventsScreenState extends State<EventsScreen>
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("عرض حسب: القائمة",
-                    style: TextStyle(fontSize: 20, color: Color(0xFF354152))),
-                Icon(Icons.filter_list, color: Colors.black54)
+                Text(
+                  "عرض حسب: القائمة",
+                  style: TextStyle(fontSize: 20, color: Color(0xFF354152)),
+                ),
+                Icon(Icons.filter_list, color: Colors.black54),
               ],
             ),
           ),
@@ -58,22 +61,17 @@ class _EventsScreenState extends State<EventsScreen>
           // TabBar
           TabBar(
             controller: tabController,
-            labelColor: const Color(0xFF1A4D3E),
-            unselectedLabelColor: const Color(0xFF697282),
-            indicatorColor: const Color(0xFF1A4D3E),
+            labelColor: Colors.brown.shade400,
+            unselectedLabelColor: const Color(0xFFA07856),
+            indicatorColor: Colors.brown.shade400,
             indicatorWeight: 3,
-            labelStyle: const TextStyle(
-              fontSize: 15, 
-              fontWeight: FontWeight.bold, 
-            ),
+            labelStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             unselectedLabelStyle: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.normal,
             ),
             tabs: const [
-              Tab(
-                text: "الفعاليات القادمة",
-              ),
+              Tab(text: "الفعاليات القادمة"),
               Tab(text: "فعالياتي"),
               Tab(text: "الفعاليات السابقة"),
             ],
@@ -83,11 +81,7 @@ class _EventsScreenState extends State<EventsScreen>
           Expanded(
             child: TabBarView(
               controller: tabController,
-              children: [
-                _emptyState(),
-                _emptyState(),
-                _emptyState(),
-              ],
+              children: [_emptyState(), _emptyState(), _emptyState()],
             ),
           ),
         ],
@@ -96,14 +90,21 @@ class _EventsScreenState extends State<EventsScreen>
   }
 
   Widget _emptyState() {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.calendar_month, size: 120, color: Color(0xFF1A4D3E)),
+          Icon(Icons.calendar_month, size: 120, color: Color(0xFFA07856)),
           SizedBox(height: 20),
-          Text("لا يوجد لديك بطاقات حاليا",
-              style: TextStyle(fontSize: 16, color: Color(0xFF354152))),
+
+          Text(
+            "لا يوجد لديك بطاقات حاليا",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.brown.shade400,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );

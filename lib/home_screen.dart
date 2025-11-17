@@ -157,13 +157,13 @@ class HomePage extends StatelessWidget {
         children: [
           const Text(
             'الوجهات المفضلة',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           const Spacer(),
           Text(
             'عرض الكل',
             style: TextStyle(
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
               fontSize: 14,
               color: Colors.brown.shade400,
             ),
