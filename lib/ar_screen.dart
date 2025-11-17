@@ -34,7 +34,7 @@ class _ARScreenState extends State<ARScreen> {
   ARNode? _node;
   List<ARNode> pathNodes = [];
   List<PointLatLng> _routePoints = [];
-  final String googleApiKey = "AIzaSyAmbeZlKzZHft_Ss9ctPpaOksLT__VwlAs";
+  final String googleApiKey = "Google_API_Key";
   //  enable Directions API key from google;
 
   @override
@@ -63,7 +63,7 @@ class _ARScreenState extends State<ARScreen> {
     if (_userPos == null) return;
 
     PolylinePoints polylinePoints = PolylinePoints(
-      apiKey: "AIzaSyAmbeZlKzZHft_Ss9ctPpaOksLT__VwlAs",
+      apiKey: "Google_API_Key",
     );
     // ignore: deprecated_member_use
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
