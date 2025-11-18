@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/EventsScreen.dart';
+import 'package:flutter_application_1/models/BookingData.dart';
+import 'package:flutter_application_1/plan_trip.dart';
 import 'home_screen.dart';
 import 'chat_screen.dart';
-import 'map_screen.dart';
 import 'challenges_screen.dart';
 
 class NavigationRoot extends StatefulWidget {
@@ -15,9 +16,14 @@ class NavigationRoot extends StatefulWidget {
 class _NavigationRootState extends State<NavigationRoot> {
   int index = 4; 
 
-  final List<Widget> pages = const [
+  final List<Widget> pages =  [
     ChatScreen(),
-    MapScreen(),
+    PlanTrip(booking: BookingData(
+      vehicle: 'مشي',
+      pickupTime: 'الآن',
+      fromLocation: 'موقف العمل',
+      toLocation: 'مركز الابتكار',
+    )),
     ChallengesScreen(),
     EventsScreen(),
     HomePage(), 
