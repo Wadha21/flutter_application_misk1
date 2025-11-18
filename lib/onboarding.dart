@@ -17,18 +17,18 @@ class _OnboardingViewState extends State<OnboardingView> {
     {
       "image": "assets/screen1.png",
       "title": "أهلاً بك في وجهة مسك",
-      "subtitle": "تطبيقك المثالي للتنقل داخل مدينة مسك"
+      "subtitle": "تطبيقك المثالي للتنقل داخل مدينة مسك",
     },
     {
       "image": "assets/screen2.png",
       "title": "اكتشف حضارة الفاو \n العريقة",
-      "subtitle": "عش رحلة عبر الزمن واستكشف تاريخ حضارة الفاو أثناء تنقلك"
+      "subtitle": "عش رحلة عبر الزمن واستكشف تاريخ حضارة الفاو أثناء تنقلك",
     },
     {
       "image": "assets/screen3.png",
       "title": "تجربة غامرة بالواقع المعزز",
       "subtitle":
-          "استمتع بتجربة AR تفاعلية واستمع للبودكاست التقائي المخصص لكل موقع تزوره"
+          "استمتع بتجربة AR تفاعلية واستمع للبودكاست التقائي المخصص لكل موقع تزوره",
     },
   ];
 
@@ -125,9 +125,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       showNextButton: false,
       showSkipButton: false,
@@ -147,9 +145,9 @@ class _OnboardingViewState extends State<OnboardingView> {
             ),
             onPressed: () {
               if (currentPageIndex == pages.length - 1) {
-                goToHome(); 
+                goToHome();
               } else {
-                introKey.currentState?.next(); 
+                introKey.currentState?.next();
               }
             },
             child: Text(

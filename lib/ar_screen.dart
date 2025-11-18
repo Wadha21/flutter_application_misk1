@@ -41,11 +41,7 @@ class _ARScreenState extends State<ARScreen> {
   ARNode? _node;
   List<ARNode> pathNodes = [];
   List<PointLatLng> _routePoints = [];
-<<<<<<< HEAD
-  final String googleApiKey = "key";
-=======
-  final String googleApiKey = "AIzaSyAioesOdHxu2Y4izUuCr3RbBnE9iWsfmXc";
->>>>>>> fb2def0d6fc061766c4cdf47b7308f4f6b9565fc
+  final String googleApiKey = "";
   //  enable Directions API key from google;
 
   final player = AudioPlayer();

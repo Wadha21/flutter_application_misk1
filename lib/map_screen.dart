@@ -14,11 +14,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController? _mapController;
   final LatLng initial = const LatLng(24.6955796, 46.583077);
-<<<<<<< HEAD
-  final String googleApiKey = "key";
-=======
-  final String googleApiKey = "AIzaSyAioesOdHxu2Y4izUuCr3RbBnE9iWsfmXc";
->>>>>>> fb2def0d6fc061766c4cdf47b7308f4f6b9565fc
+  final String googleApiKey = "";
 
   LatLng? _origin; // انطلاق
   LatLng? _destination; // وصول
@@ -173,6 +169,7 @@ class _MapScreenState extends State<MapScreen> {
         backgroundColor: const Color(0xFFA07856),
         title: const Text("الخريطة", style: TextStyle(color: Colors.white)),
         centerTitle: true,
+        // مكان مؤقت
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
