@@ -14,16 +14,16 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController? _mapController;
   final LatLng initial = const LatLng(24.6955796, 46.583077);
-  final String googleApiKey = "APIKEY";
+  final String googleApiKey = "AIzaSyAioesOdHxu2Y4izUuCr3RbBnE9iWsfmXc";
 
   LatLng? _origin; // انطلاق
   LatLng? _destination; // وصول
 
-  Set<Marker> _markers = {};
-  Set<Polyline> _polylines = {};
+  final Set<Marker> _markers = {};
+  final Set<Polyline> _polylines = {};
 
   String _selectedMode = 'walking';
-  List<String> _modes = ['walking', 'driving', 'bicycling'];
+  final List<String> _modes = ['walking', 'driving', 'bicycling'];
 
   @override
   void initState() {

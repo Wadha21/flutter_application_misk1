@@ -41,7 +41,7 @@ class _ARScreenState extends State<ARScreen> {
   ARNode? _node;
   List<ARNode> pathNodes = [];
   List<PointLatLng> _routePoints = [];
-  final String googleApiKey = "APIKEY";
+  final String googleApiKey = "AIzaSyAioesOdHxu2Y4izUuCr3RbBnE9iWsfmXc";
   //  enable Directions API key from google;
 
   final player = AudioPlayer();
@@ -149,8 +149,9 @@ class _ARScreenState extends State<ARScreen> {
     }
     pathNodes.clear();
 
-    if (_userPos == null || _deviceHeading == null || _routePoints.isEmpty)
+    if (_userPos == null || _deviceHeading == null || _routePoints.isEmpty) {
       return;
+    }
 
     for (int i = 0; i < _routePoints.length; i += 5) {
       final routePoints = _routePoints[i];
@@ -211,7 +212,7 @@ class _ARScreenState extends State<ARScreen> {
 
     final tappedNode = tappedNodes.first;
 
-    final uri = tappedNode.uri!.split('/').last;
+    final uri = tappedNode.uri.split('/').last;
     final data = objectData[uri];
 
     if (data == null) return;
