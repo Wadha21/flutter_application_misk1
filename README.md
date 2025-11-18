@@ -1,7 +1,3 @@
-# flutter_application_misk1
+# flutter_application_1
 
-
-
-## Getting Started
-
-
+A new Flutter project.
