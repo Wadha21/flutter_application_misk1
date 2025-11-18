@@ -41,7 +41,7 @@ class _ARScreenState extends State<ARScreen> {
   ARNode? _node;
   List<ARNode> pathNodes = [];
   List<PointLatLng> _routePoints = [];
-  final String googleApiKey = "APIKEY";
+  final String googleApiKey = "key";
   //  enable Directions API key from google;
 
   final player = AudioPlayer();
@@ -50,10 +50,16 @@ class _ARScreenState extends State<ARScreen> {
       "title": "تمثال الفاو العظيم",
       "info": "قطعة فنية تحاكي تراث مدينة الفاو الأثرية...",
       "audio": "audio/alfao_info.mp3",
+      //انشئي اصوات مقعط صغير
     },
     "dots_path.glb": {
       "title": "نقطة توجيه",
       "info": "هذه النقطة تشير إلى المسار الصحيح للمشي.",
+      "audio": "",
+    },
+    "kindah.glb": {
+      "title": "كنده",
+      "info": "قطعة أثرية لمملكة كندة",
       "audio": "",
     },
   };
