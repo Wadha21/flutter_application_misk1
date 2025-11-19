@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/onboarding.dart';
+import 'package:flutter_application_1/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: [Locale('ar'), Locale('en')],
       locale: Locale('ar'),
-      home: OnboardingView(),
+      home: SplashView(),
     );
   }
 }
