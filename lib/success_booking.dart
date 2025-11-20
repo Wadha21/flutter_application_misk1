@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/audio_test/podcast_screen.dart';
 import 'package:flutter_application_1/models/BookingData.dart';
 
 class SuccessScreen extends StatefulWidget {
@@ -146,10 +147,10 @@ class _SuccessScreenState extends State<SuccessScreen> {
                       ),
                     ),
                     onPressed: () {
-                      // placeholder for podcast screen or other navigation
-                      // for now we simply pop to root or navigate to a placeholder
-                      // Navigator.push(...);
-                      Navigator.popUntil(context, (route) => route.isFirst);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => PodcastScreen()),
+                      );
                     },
                     child: const Text(
                       'اختر البودكاست',
