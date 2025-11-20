@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/BookingConfirmation.dart';
 import 'package:flutter_application_1/models/BookingData.dart';
 
-
 class FirstBookingScreen extends StatefulWidget {
   final BookingData booking;
   const FirstBookingScreen({Key? key, required this.booking}) : super(key: key);
@@ -33,28 +32,42 @@ class _FirstBookingScreenState extends State<FirstBookingScreen> {
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.only(bottom: 20),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // header with back arrow
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 18,
+                  ),
                   decoration: BoxDecoration(
                     color: brown,
-                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(22)),
+                    borderRadius: const BorderRadius.vertical(
+                      bottom: Radius.circular(22),
+                    ),
                   ),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                     
-                     
-                       Center(
-                         child: Text(
-                                  'حجز '+     data.vehicle,
-                          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                                               ),
-                       ), 
-                      const SizedBox(width:50),IconButton(
-                        icon: const Icon(Icons.arrow_forward,color: Colors.white),onPressed: () => Navigator.pop(context),
+                      Center(
+                        child: Text(
+                          'حجز ' + data.vehicle,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 50),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        ),
+                        onPressed: () => Navigator.pop(context),
                       ),
                     ],
                   ),
@@ -71,11 +84,16 @@ class _FirstBookingScreenState extends State<FirstBookingScreen> {
                       color: brown.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         const Icon(Icons.location_on, color: Colors.grey),
                         const SizedBox(width: 8),
-                        Expanded(child: Text('${data.fromLocation} → ${data.toLocation}')),
+                        Expanded(
+                          child: Text(
+                            '${data.fromLocation} → ${data.toLocation}',
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -87,13 +105,23 @@ class _FirstBookingScreenState extends State<FirstBookingScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0,3))],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 6,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
                     ),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         IconButton(
                           onPressed: () {
@@ -103,16 +131,23 @@ class _FirstBookingScreenState extends State<FirstBookingScreen> {
                           },
                           icon: const Icon(Icons.remove_circle_outline),
                         ),
-                        Text('$selectedCount شخص', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        Text(
+                          '$selectedCount شخص',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         IconButton(
                           onPressed: () {
                             setState(() {
                               if (selectedCount > 1) selectedCount--;
                             });
                           },
-                          icon: const Icon(Icons.add_circle_outline)
-                        ), const Spacer(),
-                        const Text('عدد المستخدمين', style: TextStyle(color: Colors.grey)),
+                          icon: const Icon(Icons.add_circle_outline),
+                        ),
+                        const Spacer(),
+                        const Text(
+                          'عدد المستخدمين',
+                          style: TextStyle(color: Colors.grey),
+                        ),
                       ],
                     ),
                   ),
@@ -124,11 +159,15 @@ class _FirstBookingScreenState extends State<FirstBookingScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Wrap(
-                    spacing: 8,alignment: WrapAlignment.end,
+                    spacing: 8,
+                    alignment: WrapAlignment.end,
                     runSpacing: 8,
-                    children: ['الآن', 'بعد 5 دقائق', 'بعد 10 دقائق', 'بعد 30 دقيقة']
-                        .map((t) => _timeChip(t))
-                        .toList(),
+                    children: [
+                      'الآن',
+                      'بعد 5 دقائق',
+                      'بعد 10 دقائق',
+                      'بعد 30 دقيقة',
+                    ].map((t) => _timeChip(t)).toList(),
                   ),
                 ),
 
@@ -141,21 +180,30 @@ class _FirstBookingScreenState extends State<FirstBookingScreen> {
                     height: 56,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: brown,foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        backgroundColor: brown,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                       ),
-                   onPressed: () {
-  final updatedBooking = data.copyWith(
-    pickupTime: selectedTime,
-    passengerCount: selectedCount,
-  );
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (_) => BookingConfirmation(booking: updatedBooking)),
-  );
-},
+                      onPressed: () {
+                        final updatedBooking = data.copyWith(
+                          pickupTime: selectedTime,
+                          passengerCount: selectedCount,
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                BookingConfirmation(booking: updatedBooking),
+                          ),
+                        );
+                      },
 
-                      child: const Text('تأكيد الحجز', style: TextStyle(fontSize: 16)),
+                      child: const Text(
+                        'تأكيد الحجز',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                 ),
@@ -182,7 +230,10 @@ class _FirstBookingScreenState extends State<FirstBookingScreen> {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: active ? brown : Colors.grey.shade300),
         ),
-        child: Text(text, style: TextStyle(color: active ? Colors.white : Colors.black87)),
+        child: Text(
+          text,
+          style: TextStyle(color: active ? Colors.white : Colors.black87),
+        ),
       ),
     );
   }
